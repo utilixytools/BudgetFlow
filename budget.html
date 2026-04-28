@@ -60,11 +60,6 @@
       display: block;
     }
 
-    input:focus {
-      outline: none;
-      border-color: #064e3b;
-    }
-
     button {
       width: 100%;
       padding: 14px;
@@ -79,6 +74,11 @@
 
     button:hover {
       background: #022c22;
+    }
+
+    .clear-btn {
+      background: #e5e7eb;
+      color: black;
     }
 
     .result {
@@ -113,6 +113,7 @@
       <input id="resto" placeholder="Restaurants" oninput="calc()">
 
       <button onclick="calc()">Calculate</button>
+      <button class="clear-btn" onclick="clearData()">Clear</button>
 
       <div class="result" id="result">$0</div>
 
@@ -148,6 +149,21 @@ function calc() {
     food: food.value,
     resto: resto.value
   }));
+}
+
+function clearData() {
+  localStorage.removeItem("budgetData");
+
+  job1.value = "";
+  job2.value = "";
+  extra.value = "";
+  phone.value = "";
+  metro.value = "";
+  hydro.value = "";
+  food.value = "";
+  resto.value = "";
+
+  result.innerText = "Money left: $0";
 }
 
 window.onload = function() {
