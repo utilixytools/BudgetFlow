@@ -6,16 +6,21 @@
   <title>BudgetFlow</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #022c22, #064e3b);
       color: white;
       padding: 20px;
     }
 
     .container {
-      max-width: 400px;
+      max-width: 420px;
+      width: 100%;
       margin: auto;
     }
 
@@ -29,21 +34,35 @@
 
     h1 {
       text-align: center;
+      margin-bottom: 20px;
     }
 
     .card {
-      background: white;
+      background: #f9fafb;
       color: black;
       padding: 20px;
       border-radius: 20px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    h3 {
+      margin-top: 20px;
     }
 
     input {
       width: 100%;
       padding: 12px;
-      margin: 5px 0;
+      margin: 6px 0;
       border-radius: 10px;
       border: 1px solid #ccc;
+      font-size: 14px;
+      display: block;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #064e3b;
     }
 
     button {
@@ -55,6 +74,11 @@
       background: #064e3b;
       color: white;
       font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #022c22;
     }
 
     .result {
@@ -112,9 +136,9 @@ function calc() {
 
   let total = income - expenses;
 
-  result.innerText = "Money left: $" + total;
+  result.innerText = "Money left: $" + total.toFixed(2);
 
-  localStorage.setItem("data", JSON.stringify({
+  localStorage.setItem("budgetData", JSON.stringify({
     job1: job1.value,
     job2: job2.value,
     extra: extra.value,
@@ -127,7 +151,7 @@ function calc() {
 }
 
 window.onload = function() {
-  let data = JSON.parse(localStorage.getItem("data"));
+  let data = JSON.parse(localStorage.getItem("budgetData"));
 
   if (data) {
     job1.value = data.job1 || "";
