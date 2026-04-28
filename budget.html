@@ -3,130 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>BudgetFlow | Weekly Budget Calculator</title>
-  <meta name="description" content="BudgetFlow is a free weekly budget calculator that helps you track income, expenses, and money left.">
+  <title>BudgetFlow</title>
 
   <style>
-    * { box-sizing: border-box; }
-
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial;
       background: linear-gradient(135deg, #022c22, #064e3b);
       color: white;
-      min-height: 100vh;
       padding: 20px;
     }
 
     .container {
-      max-width: 430px;
+      max-width: 400px;
       margin: auto;
     }
 
-    .top {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .top img {
-      width: 80px;
-      border-radius: 18px;
-      margin-bottom: 10px;
-    }
-
-    .top h1 {
-      margin: 0;
-      font-size: 34px;
-    }
-
-    .top p {
-      color: #d1fae5;
-      margin-top: 6px;
-    }
-
     .back {
-      display: inline-block;
-      margin-bottom: 20px;
       color: white;
       text-decoration: none;
       font-weight: bold;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      text-align: center;
     }
 
     .card {
       background: white;
-      color: #111827;
-      padding: 24px;
-      border-radius: 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-    }
-
-    h2 {
-      text-align: center;
-      margin-top: 0;
-      color: #064e3b;
-    }
-
-    h3 {
-      margin-top: 25px;
-      color: #374151;
+      color: black;
+      padding: 20px;
+      border-radius: 20px;
     }
 
     input {
       width: 100%;
-      padding: 14px;
-      margin: 7px 0;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      font-size: 16px;
-      background: #f9fafb;
-    }
-
-    input:focus {
-      outline: none;
-      border-color: #064e3b;
-      background: white;
+      padding: 12px;
+      margin: 5px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
     }
 
     button {
       width: 100%;
-      padding: 16px;
-      margin-top: 18px;
+      padding: 14px;
+      margin-top: 10px;
       border: none;
-      border-radius: 16px;
+      border-radius: 12px;
       background: #064e3b;
       color: white;
-      font-size: 16px;
       font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #022c22;
-    }
-
-    .clear-btn {
-      background: #e5e7eb;
-      color: #111827;
-      margin-top: 10px;
-    }
-
-    .clear-btn:hover {
-      background: #d1d5db;
     }
 
     .result {
-      margin-top: 20px;
-      padding: 18px;
-      border-radius: 18px;
-      background: #f3f4f6;
+      margin-top: 15px;
       text-align: center;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
     }
-
-    .positive { color: #15803d; }
-    .negative { color: #dc2626; }
   </style>
 </head>
 
@@ -134,104 +70,77 @@
 
   <div class="container">
 
-    <a href="index.html" class="back">← Back to tools</a>
+    <a href="index.html" class="back">← Back to menu</a>
 
-    <div class="top">
-      <img src="logo.png" alt="UtilixyTools Logo">
-      <h1>BudgetFlow</h1>
-      <p>by UtilixyTools</p>
-    </div>
+    <h1>BudgetFlow</h1>
 
     <div class="card">
-      <h2>Weekly Budget Calculator</h2>
 
       <h3>Income</h3>
-      <input id="job1" type="number" placeholder="Job income" oninput="calculateBudget()">
-      <input id="job2" type="number" placeholder="Other income" oninput="calculateBudget()">
-      <input id="extraIncome" type="number" placeholder="Extra income" oninput="calculateBudget()">
+      <input id="job1" placeholder="Job income" oninput="calc()">
+      <input id="job2" placeholder="Other income" oninput="calc()">
+      <input id="extra" placeholder="Extra income" oninput="calc()">
 
       <h3>Expenses</h3>
-      <input id="phone" type="number" placeholder="Phone bill" oninput="calculateBudget()">
-      <input id="metro" type="number" placeholder="Metro" oninput="calculateBudget()">
-      <input id="hydro" type="number" placeholder="Hydro" oninput="calculateBudget()">
-      <input id="groceries" type="number" placeholder="Groceries" oninput="calculateBudget()">
-      <input id="restaurants" type="number" placeholder="Restaurants" oninput="calculateBudget()">
-      <input id="extra" type="number" placeholder="Extra expenses" oninput="calculateBudget()">
+      <input id="phone" placeholder="Phone" oninput="calc()">
+      <input id="metro" placeholder="Metro" oninput="calc()">
+      <input id="hydro" placeholder="Hydro" oninput="calc()">
+      <input id="food" placeholder="Food" oninput="calc()">
+      <input id="resto" placeholder="Restaurants" oninput="calc()">
 
-      <button onclick="calculateBudget()">Calculate Budget</button>
-      <button class="clear-btn" onclick="clearData()">Clear Saved Data</button>
+      <button onclick="calc()">Calculate</button>
 
-      <div class="result" id="result">Money left: $0.00</div>
+      <div class="result" id="result">$0</div>
+
     </div>
 
   </div>
 
 <script>
-const fields = [
-  "job1",
-  "job2",
-  "extraIncome",
-  "phone",
-  "metro",
-  "hydro",
-  "groceries",
-  "restaurants",
-  "extra"
-];
+function calc() {
+  let income =
+    Number(job1.value) +
+    Number(job2.value) +
+    Number(extra.value);
+
+  let expenses =
+    Number(phone.value) +
+    Number(metro.value) +
+    Number(hydro.value) +
+    Number(food.value) +
+    Number(resto.value);
+
+  let total = income - expenses;
+
+  result.innerText = "Money left: $" + total;
+
+  localStorage.setItem("data", JSON.stringify({
+    job1: job1.value,
+    job2: job2.value,
+    extra: extra.value,
+    phone: phone.value,
+    metro: metro.value,
+    hydro: hydro.value,
+    food: food.value,
+    resto: resto.value
+  }));
+}
 
 window.onload = function() {
-  fields.forEach(function(id) {
-    const savedValue = localStorage.getItem("budgetflow_" + id);
-    if (savedValue !== null) {
-      document.getElementById(id).value = savedValue;
-    }
-  });
+  let data = JSON.parse(localStorage.getItem("data"));
 
-  calculateBudget();
-};
-
-function saveData() {
-  fields.forEach(function(id) {
-    const value = document.getElementById(id).value;
-    localStorage.setItem("budgetflow_" + id, value);
-  });
-}
-
-function calculateBudget() {
-  const income =
-    Number(document.getElementById("job1").value) +
-    Number(document.getElementById("job2").value) +
-    Number(document.getElementById("extraIncome").value);
-
-  const expenses =
-    Number(document.getElementById("phone").value) +
-    Number(document.getElementById("metro").value) +
-    Number(document.getElementById("hydro").value) +
-    Number(document.getElementById("groceries").value) +
-    Number(document.getElementById("restaurants").value) +
-    Number(document.getElementById("extra").value);
-
-  const moneyLeft = income - expenses;
-  const result = document.getElementById("result");
-
-  result.innerText = "Money left: $" + moneyLeft.toFixed(2);
-
-  if (moneyLeft >= 0) {
-    result.className = "result positive";
-  } else {
-    result.className = "result negative";
+  if (data) {
+    job1.value = data.job1 || "";
+    job2.value = data.job2 || "";
+    extra.value = data.extra || "";
+    phone.value = data.phone || "";
+    metro.value = data.metro || "";
+    hydro.value = data.hydro || "";
+    food.value = data.food || "";
+    resto.value = data.resto || "";
   }
 
-  saveData();
-}
-
-function clearData() {
-  fields.forEach(function(id) {
-    localStorage.removeItem("budgetflow_" + id);
-    document.getElementById(id).value = "";
-  });
-
-  calculateBudget();
+  calc();
 }
 </script>
 
