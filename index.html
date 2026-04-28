@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BudgetFlow | UtilixyTools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      max-width: 420px;
+      margin: auto;
+    }
+
+    h1, p {
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>BudgetFlow</h1>
+  <p>by UtilixyTools</p>
+
+  <div class="card">
+    <h2>Weekly Budget Calculator</h2>
+
+    <h3>Income</h3>
+    <input id="job1" type="number" placeholder="Job income">
+    <input id="job2" type="number" placeholder="Other income">
+    <input id="extraIncome" type="number" placeholder="Extra income">
+
+    <h3>Expenses</h3>
+    <input id="phone" type="number" placeholder="Phone bill">
+    <input id="metro" type="number" placeholder="Metro">
+    <input id="hydro" type="number" placeholder="Hydro">
+    <input id="groceries" type="number" placeholder="Groceries">
+    <input id="restaurants" type="number" placeholder="Restaurants">
+    <input id="extra" type="number" placeholder="Extra expenses">
+
+    <button onclick="calculateBudget()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+<script>
+function calculateBudget() {
+  let income =
+    Number(document.getElementById("job1").value) +
+    Number(document.getElementById("job2").value) +
+    Number(document.getElementById("extraIncome").value);
+
+  let expenses =
+    Number(document.getElementById("phone").value) +
+    Number(document.getElementById("metro").value) +
+    Number(document.getElementById("hydro").value) +
+    Number(document.getElementById("groceries").value) +
+    Number(document.getElementById("restaurants").value) +
+    Number(document.getElementById("extra").value);
+
+  let moneyLeft = income - expenses;
+
+  document.getElementById("result").innerText =
+    "Money left: $" + moneyLeft.toFixed(2);
+}
+</script>
+
+</body>
+</html>
