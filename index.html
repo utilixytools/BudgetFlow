@@ -1,105 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>BudgetFlow | UtilixyTools</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UtilixyTools | Free Online Tools</title>
+  <meta name="description" content="UtilixyTools offers free simple online tools to make life easier.">
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-      max-width: 420px;
-      margin: auto;
-    }
-
-    h1, p {
-      text-align: center;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-sizing: border-box;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      background: black;
+      background: linear-gradient(135deg, #022c22, #064e3b);
       color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      margin-top: 10px;
+      min-height: 100vh;
+      padding: 20px;
     }
 
-    .result {
-      margin-top: 15px;
-      font-size: 20px;
-      font-weight: bold;
+    .container {
+      max-width: 900px;
+      margin: auto;
       text-align: center;
+    }
+
+    img {
+      width: 90px;
+      border-radius: 18px;
+      margin-top: 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: #d1fae5;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 35px;
+    }
+
+    .tool-card {
+      background: white;
+      color: #111827;
+      padding: 25px;
+      border-radius: 24px;
+      text-decoration: none;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      transition: 0.2s;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .tool-card h2 {
+      color: #064e3b;
+      margin-top: 0;
+    }
+
+    .tool-card p {
+      color: #4b5563;
+    }
+
+    .coming-soon {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #d1fae5;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>BudgetFlow</h1>
-  <p>by UtilixyTools</p>
+  <div class="container">
+    <img src="logo.png" alt="UtilixyTools Logo">
 
-  <div class="card">
-    <h2>Weekly Budget Calculator</h2>
+    <h1>UtilixyTools</h1>
+    <p>Free simple tools that make life easier.</p>
 
-    <h3>Income</h3>
-    <input id="job1" type="number" placeholder="Job income">
-    <input id="job2" type="number" placeholder="Other income">
-    <input id="extraIncome" type="number" placeholder="Extra income">
+    <div class="tools">
 
-    <h3>Expenses</h3>
-    <input id="phone" type="number" placeholder="Phone bill">
-    <input id="metro" type="number" placeholder="Metro">
-    <input id="hydro" type="number" placeholder="Hydro">
-    <input id="groceries" type="number" placeholder="Groceries">
-    <input id="restaurants" type="number" placeholder="Restaurants">
-    <input id="extra" type="number" placeholder="Extra expenses">
+      <a href="budget.html" class="tool-card">
+        <h2>BudgetFlow</h2>
+        <p>Weekly budget calculator</p>
+      </a>
 
-    <button onclick="calculateBudget()">Calculate</button>
+      <div class="tool-card coming-soon">
+        <h2>Tip Calculator</h2>
+        <p>Coming soon</p>
+      </div>
 
-    <div class="result" id="result"></div>
+      <div class="tool-card coming-soon">
+        <h2>Rent Splitter</h2>
+        <p>Coming soon</p>
+      </div>
+
+      <div class="tool-card coming-soon">
+        <h2>Salary Calculator</h2>
+        <p>Coming soon</p>
+      </div>
+
+    </div>
+
+    <footer>
+      © 2026 UtilixyTools. Simple tools. Smart solutions.
+    </footer>
   </div>
-
-<script>
-function calculateBudget() {
-  let income =
-    Number(document.getElementById("job1").value) +
-    Number(document.getElementById("job2").value) +
-    Number(document.getElementById("extraIncome").value);
-
-  let expenses =
-    Number(document.getElementById("phone").value) +
-    Number(document.getElementById("metro").value) +
-    Number(document.getElementById("hydro").value) +
-    Number(document.getElementById("groceries").value) +
-    Number(document.getElementById("restaurants").value) +
-    Number(document.getElementById("extra").value);
-
-  let moneyLeft = income - expenses;
-
-  document.getElementById("result").innerText =
-    "Money left: $" + moneyLeft.toFixed(2);
-}
-</script>
 
 </body>
 </html>
