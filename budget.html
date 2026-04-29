@@ -1,189 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BudgetFlow</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BudgetFlow</title>
 
-  <!-- ✅ ICON -->
-  <link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" href="logo.png">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #022c22, #064e3b);
-      color: white;
-      padding: 20px;
-    }
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg,#022c22,#064e3b);
+  color: white;
+  padding: 20px;
+}
 
-    .container {
-      max-width: 420px;
-      width: 100%;
-      margin: auto;
-    }
+.container {
+  max-width: 420px;
+  margin: auto;
+}
 
-    .back {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      display: block;
-      margin-bottom: 15px;
-    }
+.card {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 20px;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+}
 
-    .card {
-      background: #f9fafb;
-      color: black;
-      padding: 20px;
-      border-radius: 20px;
-      overflow: hidden;
-      width: 100%;
-    }
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+}
 
-    h3 {
-      margin-top: 20px;
-    }
+.clear-btn {
+  background: #ccc;
+}
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 6px 0;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      display: block;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 12px;
-      background: #064e3b;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #022c22;
-    }
-
-    .clear-btn {
-      background: #e5e7eb;
-      color: black;
-    }
-
-    .result {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-    }
-  </style>
+.result {
+  margin-top: 10px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <a href="index.html" class="back">← Back to menu</a>
+<a href="index.html">← Back</a>
 
-    <h1>BudgetFlow</h1>
+<h1>BudgetFlow</h1>
 
-    <div class="card">
+<div class="card">
 
-      <h3>Income</h3>
-      <input id="job1" placeholder="Job income" oninput="calc()">
-      <input id="job2" placeholder="Other income" oninput="calc()">
-      <input id="extra" placeholder="Extra income" oninput="calc()">
+<input id="job1" placeholder="Job income">
+<input id="job2" placeholder="Other income">
+<input id="extra" placeholder="Extra income">
 
-      <h3>Expenses</h3>
-      <input id="phone" placeholder="Phone" oninput="calc()">
-      <input id="metro" placeholder="Metro" oninput="calc()">
-      <input id="hydro" placeholder="Hydro" oninput="calc()">
-      <input id="food" placeholder="Food" oninput="calc()">
-      <input id="resto" placeholder="Restaurants" oninput="calc()">
+<input id="phone" placeholder="Phone">
+<input id="metro" placeholder="Metro">
+<input id="hydro" placeholder="Hydro">
+<input id="food" placeholder="Food">
+<input id="resto" placeholder="Restaurants">
 
-      <button onclick="calc()">Calculate</button>
-      <button class="clear-btn" onclick="clearData()">Clear</button>
+<button onclick="calc()">Calculate</button>
+<button class="clear-btn" onclick="clearData()">Clear</button>
 
-      <div class="result" id="result">Money left: $0</div>
+<div id="result">Money left: $0</div>
 
-    </div>
-
-  </div>
+</div>
+</div>
 
 <script>
-function calc() {
-  let income =
-    Number(job1.value) +
-    Number(job2.value) +
-    Number(extra.value);
-
-  let expenses =
-    Number(phone.value) +
-    Number(metro.value) +
-    Number(hydro.value) +
-    Number(food.value) +
-    Number(resto.value);
-
-  let total = income - expenses;
-
-  result.innerText = "Money left: $" + total.toFixed(2);
-
-  localStorage.setItem("budgetData", JSON.stringify({
-    job1: job1.value,
-    job2: job2.value,
-    extra: extra.value,
-    phone: phone.value,
-    metro: metro.value,
-    hydro: hydro.value,
-    food: food.value,
-    resto: resto.value
-  }));
+function calc(){
+let income = +job1.value + +job2.value + +extra.value;
+let expenses = +phone.value + +metro.value + +hydro.value + +food.value + +resto.value;
+let total = income - expenses;
+result.innerText = "Money left: $" + total.toFixed(2);
 }
 
-function clearData() {
-  localStorage.removeItem("budgetData");
-
-  job1.value = "";
-  job2.value = "";
-  extra.value = "";
-  phone.value = "";
-  metro.value = "";
-  hydro.value = "";
-  food.value = "";
-  resto.value = "";
-
-  result.innerText = "Money left: $0";
-}
-
-window.onload = function() {
-  let data = JSON.parse(localStorage.getItem("budgetData"));
-
-  if (data) {
-    job1.value = data.job1 || "";
-    job2.value = data.job2 || "";
-    extra.value = data.extra || "";
-    phone.value = data.phone || "";
-    metro.value = data.metro || "";
-    hydro.value = data.hydro || "";
-    food.value = data.food || "";
-    resto.value = data.resto || "";
-  }
-
-  calc();
+function clearData(){
+job1.value="";
+job2.value="";
+extra.value="";
+phone.value="";
+metro.value="";
+hydro.value="";
+food.value="";
+resto.value="";
+result.innerText="Money left: $0";
 }
 </script>
 
