@@ -5,27 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UtilixyTools</title>
 
-  <!-- ✅ ICON -->
   <link rel="icon" type="image/png" href="logo.png">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #022c22, #064e3b);
       color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px;
     }
 
     .container {
+      max-width: 800px;
+      margin: auto;
       text-align: center;
+      padding-top: 40px;
     }
 
     img {
@@ -33,24 +31,38 @@
       margin-bottom: 10px;
     }
 
-    h1 {
-      margin-bottom: 20px;
+    h1 { margin-bottom: 5px; }
+
+    p {
+      color: #d1fae5;
+      margin-bottom: 30px;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
     }
 
     .tool {
-      display: block;
       background: white;
       color: black;
-      padding: 15px;
-      margin: 10px auto;
-      width: 250px;
-      border-radius: 12px;
+      padding: 20px;
+      border-radius: 16px;
       text-decoration: none;
       font-weight: bold;
     }
 
-    .tool:hover {
-      background: #e5e7eb;
+    .tool span {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #6b7280;
+      font-weight: normal;
+    }
+
+    .coming-soon {
+      opacity: 0.6;
     }
   </style>
 </head>
@@ -58,10 +70,33 @@
 <body>
 
   <div class="container">
-    <img src="logo.png" alt="logo">
+    <img src="logo.png">
     <h1>UtilixyTools</h1>
+    <p>Choose a tool</p>
 
-    <a href="budget.html" class="tool">💰 BudgetFlow</a>
+    <div class="tools">
+
+      <a href="budget.html" class="tool">
+        💰 BudgetFlow
+        <span>Weekly budget calculator</span>
+      </a>
+
+      <a href="tax.html" class="tool">
+        🧾 Quebec Tax Calculator
+        <span>Calculate TPS/TVQ</span>
+      </a>
+
+      <div class="tool coming-soon">
+        🏠 Rent Splitter
+        <span>Coming soon</span>
+      </div>
+
+      <div class="tool coming-soon">
+        💵 Salary Calculator
+        <span>Coming soon</span>
+      </div>
+
+    </div>
   </div>
 
 </body>
