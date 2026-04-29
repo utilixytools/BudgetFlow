@@ -1,85 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quebec Tax Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quebec Tax Calculator</title>
 
-<link rel="icon" href="logo.png">
+  <link rel="icon" href="logo.png">
 
-<style>
-body {
-  font-family: Arial;
-  background: linear-gradient(135deg,#022c22,#064e3b);
-  color: white;
-  padding: 20px;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-.container {
-  max-width: 420px;
-  margin: auto;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #022c22, #064e3b);
+      color: white;
+      padding: 20px;
+      min-height: 100vh;
+    }
 
-.card {
-  background: white;
-  color: black;
-  padding: 20px;
-  border-radius: 20px;
-}
+    .container {
+      max-width: 420px;
+      width: 100%;
+      margin: auto;
+    }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-}
+    .back {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 15px;
+    }
 
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-}
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-.result {
-  margin-top: 10px;
-}
-</style>
+    .card {
+      background: #f9fafb;
+      color: black;
+      padding: 20px;
+      border-radius: 20px;
+      width: 100%;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      display: block;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #064e3b;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 8px;
+      border: none;
+      border-radius: 12px;
+      background: #064e3b;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #022c22;
+    }
+
+    .clear-btn {
+      background: #e5e7eb;
+      color: black;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      line-height: 1.8;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-<a href="index.html">← Back</a>
+    <a href="index.html" class="back">← Back to menu</a>
 
-<h1>Quebec Tax Calculator</h1>
+    <h1>Quebec Tax Calculator</h1>
 
-<div class="card">
+    <div class="card">
+      <label for="price">Price before tax</label>
+      <input id="price" type="number" placeholder="Example: 100" oninput="calc()">
 
-<input id="price" placeholder="Price before tax">
+      <button onclick="calc()">Calculate</button>
+      <button class="clear-btn" onclick="clearTax()">Clear</button>
 
-<button onclick="calc()">Calculate</button>
+      <div class="result" id="result">
+        GST/TPS: $0.00<br>
+        QST/TVQ: $0.00<br>
+        Total: $0.00
+      </div>
+    </div>
 
-<div id="result">
-GST: $0<br>
-QST: $0<br>
-Total: $0
-</div>
-
-</div>
-</div>
+  </div>
 
 <script>
-function calc(){
-let p = +price.value;
+function calc() {
+  let price = Number(document.getElementById("price").value);
 
-let gst = p * 0.05;
-let qst = p * 0.09975;
-let total = p + gst + qst;
+  let gst = price * 0.05;
+  let qst = price * 0.09975;
+  let total = price + gst + qst;
 
-result.innerHTML =
-"GST: $" + gst.toFixed(2) + "<br>" +
-"QST: $" + qst.toFixed(2) + "<br>" +
-"Total: $" + total.toFixed(2);
+  document.getElementById("result").innerHTML =
+    "GST/TPS: $" + gst.toFixed(2) + "<br>" +
+    "QST/TVQ: $" + qst.toFixed(2) + "<br>" +
+    "Total: $" + total.toFixed(2);
+
+  localStorage.setItem("taxPrice", document.getElementById("price").value);
+}
+
+function clearTax() {
+  localStorage.removeItem("taxPrice");
+  document.getElementById("price").value = "";
+
+  document.getElementById("result").innerHTML =
+    "GST/TPS: $0.00<br>" +
+    "QST/TVQ: $0.00<br>" +
+    "Total: $0.00";
+}
+
+window.onload = function() {
+  let savedPrice = localStorage.getItem("taxPrice");
+
+  if (savedPrice) {
+    document.getElementById("price").value = savedPrice;
+    calc();
+  }
 }
 </script>
 
