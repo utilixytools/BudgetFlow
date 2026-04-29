@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BudgetFlow</title>
+
+<title>BudgetFlow – Free Income and Expense Tracker</title>
+<meta name="description" content="Track your income and expenses with BudgetFlow. A free online budget tracker to calculate monthly income, expenses, and money left.">
 
 <link rel="icon" href="logo.png">
 
@@ -20,7 +22,7 @@ body {
 }
 
 .container {
-  max-width: 420px;
+  max-width: 520px;
   margin: auto;
 }
 
@@ -34,15 +36,23 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.card {
+.intro {
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #e5e7eb;
+}
+
+.card, .seo-box {
   background: #f9fafb;
   color: black;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  margin-bottom: 20px;
 }
 
 .section-title {
@@ -88,6 +98,14 @@ button {
   font-weight: bold;
   text-align: center;
 }
+
+.seo-box h2 {
+  margin-top: 0;
+}
+
+.seo-box p, .seo-box li {
+  line-height: 1.6;
+}
 </style>
 </head>
 
@@ -97,23 +115,27 @@ button {
 
 <a href="index.html" class="back">← Back</a>
 
-<h1>BudgetFlow</h1>
+<h1>BudgetFlow: Free Income and Expense Tracker</h1>
+
+<p class="intro">
+  Track your income, expenses, and monthly budget in one simple tool.
+</p>
 
 <div class="card">
 
 <div class="section-title">Income</div>
 
-<input id="job1" placeholder="Job income">
-<input id="job2" placeholder="Other income">
-<input id="extra" placeholder="Extra income">
+<input id="job1" type="number" placeholder="Job income">
+<input id="job2" type="number" placeholder="Other income">
+<input id="extra" type="number" placeholder="Extra income">
 
 <div class="section-title">Expenses</div>
 
-<input id="phone" placeholder="Phone">
-<input id="metro" placeholder="Metro">
-<input id="hydro" placeholder="Hydro">
-<input id="food" placeholder="Food">
-<input id="resto" placeholder="Restaurants">
+<input id="phone" type="number" placeholder="Phone">
+<input id="metro" type="number" placeholder="Metro">
+<input id="hydro" type="number" placeholder="Hydro">
+<input id="food" type="number" placeholder="Food">
+<input id="resto" type="number" placeholder="Restaurants">
 
 <button class="calc-btn" onclick="calc()">Calculate</button>
 <button class="clear-btn" onclick="clearData()">Clear</button>
@@ -123,28 +145,57 @@ Money left: $0
 </div>
 
 </div>
+
+<div class="seo-box">
+  <h2>What is BudgetFlow?</h2>
+  <p>
+    BudgetFlow is a free online income and expense tracker. It helps you calculate your total income, subtract your monthly expenses, and see how much money you have left.
+  </p>
+
+  <h2>Who can use this budget tracker?</h2>
+  <p>
+    This tool is useful for students, workers, freelancers, and anyone who wants to manage their monthly budget more easily.
+  </p>
+
+  <h2>How to use BudgetFlow</h2>
+  <ul>
+    <li>Enter your income sources.</li>
+    <li>Enter your monthly expenses.</li>
+    <li>Click calculate to see your money left.</li>
+  </ul>
+</div>
+
 </div>
 
 <script>
 function calc(){
-let income = +job1.value + +job2.value + +extra.value;
-let expenses = +phone.value + +metro.value + +hydro.value + +food.value + +resto.value;
+  let income = 
+    Number(job1.value || 0) + 
+    Number(job2.value || 0) + 
+    Number(extra.value || 0);
 
-let total = income - expenses;
+  let expenses = 
+    Number(phone.value || 0) + 
+    Number(metro.value || 0) + 
+    Number(hydro.value || 0) + 
+    Number(food.value || 0) + 
+    Number(resto.value || 0);
 
-result.innerText = "Money left: $" + total.toFixed(2);
+  let total = income - expenses;
+
+  result.innerText = "Money left: $" + total.toFixed(2);
 }
 
 function clearData(){
-job1.value="";
-job2.value="";
-extra.value="";
-phone.value="";
-metro.value="";
-hydro.value="";
-food.value="";
-resto.value="";
-result.innerText="Money left: $0";
+  job1.value="";
+  job2.value="";
+  extra.value="";
+  phone.value="";
+  metro.value="";
+  hydro.value="";
+  food.value="";
+  resto.value="";
+  result.innerText="Money left: $0";
 }
 </script>
 
