@@ -12,10 +12,11 @@
 
 body {
   margin: 0;
-  font-family: Arial;
-  background: linear-gradient(135deg,#022c22,#064e3b);
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #022c22, #064e3b);
   color: white;
   padding: 20px;
+  min-height: 100vh;
 }
 
 .container {
@@ -23,31 +24,69 @@ body {
   margin: auto;
 }
 
+.back {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .card {
-  background: white;
+  background: #f9fafb;
   color: black;
   padding: 20px;
   border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.section-title {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 input {
   width: 100%;
-  padding: 10px;
-  margin: 5px 0;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 }
 
 button {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  padding: 14px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.calc-btn {
+  background: #064e3b;
+  color: white;
 }
 
 .clear-btn {
-  background: #ccc;
+  background: #e5e7eb;
+  color: black;
 }
 
 .result {
-  margin-top: 10px;
+  margin-top: 15px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-weight: bold;
+  text-align: center;
 }
 </style>
 </head>
@@ -56,15 +95,19 @@ button {
 
 <div class="container">
 
-<a href="index.html">← Back</a>
+<a href="index.html" class="back">← Back</a>
 
 <h1>BudgetFlow</h1>
 
 <div class="card">
 
+<div class="section-title">Income</div>
+
 <input id="job1" placeholder="Job income">
 <input id="job2" placeholder="Other income">
 <input id="extra" placeholder="Extra income">
+
+<div class="section-title">Expenses</div>
 
 <input id="phone" placeholder="Phone">
 <input id="metro" placeholder="Metro">
@@ -72,10 +115,12 @@ button {
 <input id="food" placeholder="Food">
 <input id="resto" placeholder="Restaurants">
 
-<button onclick="calc()">Calculate</button>
+<button class="calc-btn" onclick="calc()">Calculate</button>
 <button class="clear-btn" onclick="clearData()">Clear</button>
 
-<div id="result">Money left: $0</div>
+<div class="result" id="result">
+Money left: $0
+</div>
 
 </div>
 </div>
@@ -84,7 +129,9 @@ button {
 function calc(){
 let income = +job1.value + +job2.value + +extra.value;
 let expenses = +phone.value + +metro.value + +hydro.value + +food.value + +resto.value;
+
 let total = income - expenses;
+
 result.innerText = "Money left: $" + total.toFixed(2);
 }
 
