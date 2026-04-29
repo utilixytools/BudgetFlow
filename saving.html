@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savings Goal Calculator</title>
+<link rel="icon" href="logo.png">
 
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #022c22, #064e3b);
+  color: white;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 420px;
+  margin: auto;
+}
+
+.back {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #f9fafb;
+  color: black;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.calc-btn {
+  background: #064e3b;
+  color: white;
+}
+
+.clear-btn {
+  background: #e5e7eb;
+  color: black;
+}
+
+.result {
+  margin-top: 15px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-weight: bold;
+  line-height: 1.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html" class="back">← Back to menu</a>
+
+<h1>Savings Goal Calculator</h1>
+
+<div class="card">
+
+<input id="goal" type="number" placeholder="Savings goal amount">
+<input id="saved" type="number" placeholder="Amount already saved">
+<input id="monthly" type="number" placeholder="Amount you can save per month">
+
+<button class="calc-btn" onclick="calc()">Calculate</button>
+<button class="clear-btn" onclick="clearData()">Clear</button>
+
+<div class="result" id="result">
+Remaining: $0.00<br>
+Time needed: 0 months
+</div>
+
+</div>
+</div>
+
+<script>
+function calc() {
+  let goal = Number(document.getElementById("goal").value);
+  let saved = Number(document.getElementById("saved").value);
+  let monthly = Number(document.getElementById("monthly").value);
+
+  let remaining = goal - saved;
+
+  if (remaining < 0) remaining = 0;
+
+  let months = 0;
+
+  if (monthly > 0) {
+    months = Math.ceil(remaining / monthly);
+  }
+
+  let years = Math.floor(months / 12);
+  let extraMonths = months % 12;
+
+  let timeText = "";
+
+  if (months === 0) {
+    timeText = "Goal already reached";
+  } else if (years > 0) {
+    timeText = years + " year(s) and " + extraMonths + " month(s)";
+  } else {
+    timeText = months + " month(s)";
+  }
+
+  document.getElementById("result").innerHTML =
+    "Remaining: $" + remaining.toFixed(2) + "<br>" +
+    "Time needed: " + timeText;
+
+  localStorage.setItem("savingGoalData", JSON.stringify({
+    goal: goal,
+    saved: saved,
+    monthly: monthly
+  }));
+}
+
+function clearData() {
+  localStorage.removeItem("savingGoalData");
+
+  document.getElementById("goal").value = "";
+  document.getElementById("saved").value = "";
+  document.getElementById("monthly").value = "";
+
+  document.getElementById("result").innerHTML =
+    "Remaining: $0.00<br>" +
+    "Time needed: 0 months";
+}
+
+window.onload = function() {
+  let data = JSON.parse(localStorage.getItem("savingGoalData"));
+
+  if (data) {
+    document.getElementById("goal").value = data.goal || "";
+    document.getElementById("saved").value = data.saved || "";
+    document.getElementById("monthly").value = data.monthly || "";
+    calc();
+  }
+}
+</script>
+
+</body>
+</html>
