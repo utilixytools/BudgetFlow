@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quebec Tax Calculator</title>
 
+<link rel="icon" href="logo.png">
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg,#022c22,#064e3b);
+  color: white;
+  padding: 20px;
+}
+
+.container {
+  max-width: 420px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.result {
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html">← Back</a>
+
+<h1>Quebec Tax Calculator</h1>
+
+<div class="card">
+
+<input id="price" placeholder="Price before tax">
+
+<button onclick="calc()">Calculate</button>
+
+<div id="result">
+GST: $0<br>
+QST: $0<br>
+Total: $0
+</div>
+
+</div>
+</div>
+
+<script>
+function calc(){
+let p = +price.value;
+
+let gst = p * 0.05;
+let qst = p * 0.09975;
+let total = p + gst + qst;
+
+result.innerHTML =
+"GST: $" + gst.toFixed(2) + "<br>" +
+"QST: $" + qst.toFixed(2) + "<br>" +
+"Total: $" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
