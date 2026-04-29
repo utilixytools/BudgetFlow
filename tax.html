@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quebec Tax Calculator</title>
+
+  <title>Quebec Tax Calculator – GST/TPS and QST/TVQ</title>
+  <meta name="description" content="Calculate Quebec sales tax with this free GST/TPS and QST/TVQ calculator. Enter a price before tax and get the tax amounts and total instantly.">
 
   <link rel="icon" href="logo.png">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -22,7 +22,7 @@
     }
 
     .container {
-      max-width: 420px;
+      max-width: 520px;
       width: 100%;
       margin: auto;
     }
@@ -37,16 +37,24 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
-    .card {
+    .intro {
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #e5e7eb;
+    }
+
+    .card, .seo-box {
       background: #f9fafb;
       color: black;
       padding: 20px;
       border-radius: 20px;
       width: 100%;
       box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      margin-bottom: 20px;
     }
 
     label {
@@ -100,6 +108,14 @@
       line-height: 1.8;
       font-weight: bold;
     }
+
+    .seo-box h2 {
+      margin-top: 0;
+    }
+
+    .seo-box p, .seo-box li {
+      line-height: 1.6;
+    }
   </style>
 </head>
 
@@ -109,7 +125,11 @@
 
     <a href="index.html" class="back">← Back to menu</a>
 
-    <h1>Quebec Tax Calculator</h1>
+    <h1>Quebec Tax Calculator: GST/TPS and QST/TVQ</h1>
+
+    <p class="intro">
+      Calculate Quebec sales tax instantly by entering a price before tax.
+    </p>
 
     <div class="card">
       <label for="price">Price before tax</label>
@@ -125,11 +145,30 @@
       </div>
     </div>
 
+    <div class="seo-box">
+      <h2>What is the Quebec Tax Calculator?</h2>
+      <p>
+        This free Quebec tax calculator helps you calculate GST/TPS and QST/TVQ on any price. Enter the price before tax and the tool will show the GST/TPS amount, the QST/TVQ amount, and the total price after tax.
+      </p>
+
+      <h2>Quebec sales tax rates</h2>
+      <p>
+        In Quebec, GST/TPS is calculated at 5% and QST/TVQ is calculated at 9.975%. Together, they are commonly used to calculate sales tax on many purchases in Quebec.
+      </p>
+
+      <h2>How to use this calculator</h2>
+      <ul>
+        <li>Enter the price before tax.</li>
+        <li>The calculator will add GST/TPS and QST/TVQ.</li>
+        <li>You will instantly see the total price after tax.</li>
+      </ul>
+    </div>
+
   </div>
 
 <script>
 function calc() {
-  let price = Number(document.getElementById("price").value);
+  let price = Number(document.getElementById("price").value || 0);
 
   let gst = price * 0.05;
   let qst = price * 0.09975;
