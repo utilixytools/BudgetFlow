@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Savings Goal Calculator</title>
+
+<title>Savings Goal Calculator – Free Monthly Savings Planner</title>
+<meta name="description" content="Use this free savings goal calculator to see how much money you need to save and how long it will take to reach your goal.">
+
 <link rel="icon" href="logo.png">
 
 <style>
@@ -19,7 +22,7 @@ body {
 }
 
 .container {
-  max-width: 420px;
+  max-width: 520px;
   margin: auto;
 }
 
@@ -33,15 +36,23 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.card {
+.intro {
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #e5e7eb;
+}
+
+.card, .seo-box {
   background: #f9fafb;
   color: black;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  margin-bottom: 20px;
 }
 
 input {
@@ -81,6 +92,14 @@ button {
   font-weight: bold;
   line-height: 1.7;
 }
+
+.seo-box h2 {
+  margin-top: 0;
+}
+
+.seo-box p, .seo-box li {
+  line-height: 1.6;
+}
 </style>
 </head>
 
@@ -91,6 +110,10 @@ button {
 <a href="index.html" class="back">← Back to menu</a>
 
 <h1>Savings Goal Calculator</h1>
+
+<p class="intro">
+  Calculate how much you still need to save and how long it will take to reach your goal.
+</p>
 
 <div class="card">
 
@@ -107,13 +130,34 @@ Time needed: 0 months
 </div>
 
 </div>
+
+<div class="seo-box">
+  <h2>What is a savings goal calculator?</h2>
+  <p>
+    A savings goal calculator helps you estimate how long it will take to reach a money goal. Enter your target amount, how much you already saved, and how much you can save each month.
+  </p>
+
+  <h2>Who can use this savings planner?</h2>
+  <p>
+    This tool is useful for students, workers, freelancers, and anyone planning to save money for rent, travel, emergency funds, purchases, or personal goals.
+  </p>
+
+  <h2>How to use this calculator</h2>
+  <ul>
+    <li>Enter your total savings goal.</li>
+    <li>Enter the amount you already saved.</li>
+    <li>Enter how much you can save per month.</li>
+    <li>Click calculate to see the remaining amount and estimated time needed.</li>
+  </ul>
+</div>
+
 </div>
 
 <script>
 function calc() {
-  let goal = Number(document.getElementById("goal").value);
-  let saved = Number(document.getElementById("saved").value);
-  let monthly = Number(document.getElementById("monthly").value);
+  let goal = Number(document.getElementById("goal").value || 0);
+  let saved = Number(document.getElementById("saved").value || 0);
+  let monthly = Number(document.getElementById("monthly").value || 0);
 
   let remaining = goal - saved;
 
