@@ -5,14 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Currency Converter - UtilixyTools</title>
 
+<link rel="icon" href="logo.png">
+
 <style>
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #022c22, #064e3b);
   color: white;
-  min-height: 100vh;
   padding: 20px;
+  min-height: 100vh;
 }
 
 .container {
@@ -20,28 +24,31 @@ body {
   margin: auto;
 }
 
-.card {
-  background: white;
-  color: #111;
-  padding: 22px;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+.back {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15px;
 }
 
 h1 {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-label {
-  font-weight: bold;
-  margin-top: 12px;
-  display: block;
+.card {
+  background: #f9fafb;
+  color: black;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
 }
 
 input, select, button {
   width: 100%;
   padding: 13px;
-  margin-top: 8px;
+  margin-top: 10px;
   border-radius: 12px;
   border: 1px solid #ccc;
   font-size: 16px;
@@ -63,10 +70,11 @@ button {
   text-align: center;
 }
 
-.back {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+.info {
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+  color: #6b7280;
 }
 </style>
 </head>
@@ -74,15 +82,15 @@ button {
 <body>
 
 <div class="container">
+
   <a href="index.html" class="back">← Back</a>
 
-  <h1>Currency Converter</h1>
+  <h1>💱 Currency Converter</h1>
 
   <div class="card">
-    <label>Amount</label>
-    <input type="number" id="amount" placeholder="Example: 100">
 
-    <label>From</label>
+    <input type="number" id="amount" placeholder="Enter amount">
+
     <select id="from">
       <option value="CAD">CAD - Canadian Dollar</option>
       <option value="USD">USD - US Dollar</option>
@@ -91,7 +99,6 @@ button {
       <option value="GBP">GBP - British Pound</option>
     </select>
 
-    <label>To</label>
     <select id="to">
       <option value="USD">USD - US Dollar</option>
       <option value="CAD">CAD - Canadian Dollar</option>
@@ -103,7 +110,10 @@ button {
     <button onclick="convertCurrency()">Convert</button>
 
     <div class="result" id="result"></div>
+    <div class="info" id="info"></div>
+
   </div>
+
 </div>
 
 <script>
@@ -112,24 +122,40 @@ async function convertCurrency() {
   const from = document.getElementById("from").value;
   const to = document.getElementById("to").value;
   const result = document.getElementById("result");
+  const info = document.getElementById("info");
 
   if (!amount || amount <= 0) {
-    result.innerHTML = "Please enter a valid amount.";
+    result.innerHTML = "Enter a valid amount.";
+    info.innerHTML = "";
     return;
   }
 
   result.innerHTML = "Converting...";
+  info.innerHTML = "";
 
   try {
     const response = await fetch(`https://open.er-api.com/v6/latest/${from}`);
     const data = await response.json();
 
+    if (data.result !== "success") {
+      result.innerHTML = "Rate unavailable.";
+      return;
+    }
+
     const rate = data.rates[to];
     const converted = amount * rate;
 
     result.innerHTML = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
+
+    info.innerHTML = `
+      Rate: 1 ${from} = ${rate.toFixed(4)} ${to}<br>
+      Updated: ${data.time_last_update_utc}<br>
+      *Rates are estimates and may differ from banks or exchange offices.
+    `;
+
   } catch (error) {
-    result.innerHTML = "Error. Please try again.";
+    result.innerHTML = "Error. Try again.";
+    info.innerHTML = "";
   }
 }
 </script>
