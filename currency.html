@@ -8,19 +8,21 @@
 <link rel="icon" href="logo.png">
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #022c22, #064e3b);
   color: white;
-  padding: 20px;
   min-height: 100vh;
+  padding: 20px;
 }
 
 .container {
-  max-width: 420px;
+  max-width: 520px;
   margin: auto;
 }
 
@@ -29,42 +31,59 @@ body {
   text-decoration: none;
   font-weight: bold;
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 20px 0 30px;
+  font-size: 36px;
 }
 
 .card {
   background: #f9fafb;
   color: black;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 26px;
+  border-radius: 24px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.25);
 }
 
-input, select, button {
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+input, select {
   width: 100%;
-  padding: 13px;
-  margin-top: 10px;
-  border-radius: 12px;
+  padding: 14px;
+  border-radius: 14px;
   border: 1px solid #ccc;
   font-size: 16px;
 }
 
 button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 16px;
+  border: none;
   background: #064e3b;
   color: white;
-  border: none;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 18px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #065f46;
 }
 
 .result {
-  margin-top: 18px;
+  margin-top: 20px;
   font-size: 22px;
   font-weight: bold;
   text-align: center;
@@ -75,6 +94,16 @@ button {
   font-size: 13px;
   text-align: center;
   color: #6b7280;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .card {
+    padding: 20px;
+  }
 }
 </style>
 </head>
@@ -89,8 +118,10 @@ button {
 
   <div class="card">
 
-    <input type="number" id="amount" placeholder="Enter amount">
+    <label>Amount</label>
+    <input type="number" id="amount" placeholder="Example: 100">
 
+    <label>From</label>
     <select id="from">
       <option value="CAD">CAD - Canadian Dollar</option>
       <option value="USD">USD - US Dollar</option>
@@ -99,6 +130,7 @@ button {
       <option value="GBP">GBP - British Pound</option>
     </select>
 
+    <label>To</label>
     <select id="to">
       <option value="USD">USD - US Dollar</option>
       <option value="CAD">CAD - Canadian Dollar</option>
